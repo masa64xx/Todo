@@ -8,16 +8,17 @@
 
 import UIKit
 
-class detailTodo: UIViewController {
+class DetailTodo: UIViewController {
     
+    var parame:String = "init param"
+
     @IBOutlet weak var paramLabel: UILabel!
     
     //パラメータ受取用プロパティ
-    var param:String = "init param"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //パラメータのバインド
-        self.paramLabel.text = self.param
+        self.paramLabel.text = self.parame
     }
 }

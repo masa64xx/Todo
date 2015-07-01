@@ -10,12 +10,11 @@ import Foundation
 
 class ToDoItem: NSObject{
 
-    var itemName: NSString = ""
+    var itemName: String = ""
     var completed: Bool = false
     var creationDate: NSDate = NSDate()
     
     init(name:String){
         self.itemName = name
     }
-
 }

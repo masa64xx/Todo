@@ -10,7 +10,8 @@ import UIKit
 
 
 
-@objc(ToDoListTableViewController) class ToDoListTableViewController: UITableViewController {
+@objc(ToDoListTableViewController)
+class ToDoListTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBAction func unwindToList(segue:UIStoryboardSegue){
         var source: AddToDoViewController = segue.sourceViewController as! AddToDoViewController
@@ -78,7 +79,19 @@ import UIKit
                         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
-   }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        select(tableView)
+        performSegueWithIdentifier("toSubViewController",sender: nil)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "segue"){
+            var secondView : DetailTodo = segue.destinationViewController as! DetailTodo
+            secondView.parame = self.toDoItems.objectAtIndex(0) as! String
+        }
+    }
+}
+
+   
 
 
 
