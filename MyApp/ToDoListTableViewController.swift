@@ -79,21 +79,14 @@ class ToDoListTableViewController: UITableViewController, UITableViewDelegate, U
                         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        select(tableView)
-        performSegueWithIdentifier("toSubViewController",sender: nil)
-    }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "segue"){
-            var secondView : DetailTodo = segue.destinationViewController as! DetailTodo
-            secondView.parame = self.toDoItems.objectAtIndex(0) as! String
-        }
-    }
-}
+    class TodoItemViewController: UIViewController {
+        // ...
+        
+       
 
    
-
-
+}
+}
 
 
 

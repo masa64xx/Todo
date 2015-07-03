@@ -10,31 +10,57 @@ import UIKit
 
 class AddToDoViewController: UIViewController {
     
-    var toDoItem: ToDoItem?
 
     @IBOutlet var textfield : UITextField!
     @IBOutlet var doneButton : UIBarButtonItem!
+    @IBOutlet weak var textbar: UITextField!
+    @IBOutlet var ToDoItem
+    
+    var toDoItem: ToDoItem? = nil
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        if let ToDoItem = task {
+            textbar.text = ToDoItem.item
+        }
+     func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
+     func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if sender as? NSObject != self.doneButton{
-            return
-        }
-        if !self.textfield.text.isEmpty{
-            self.toDoItem = ToDoItem(name: self.textfield.text)
+             func donebuttun(sender: UIBarButtonItem) {
+                if textbar != nil {
+                    editTask()
+                } else {
+                    createTask()
+                }
+                navigationController!.popViewControllerAnimated(true)
+            }
+            
+            func createTask() {
+                let newTask: ToDoItem = ToDoItem.MR_createEntity() as! ToDoItem
+                newTask.item = textField.text
+                newTask.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            }
+            
+            func editTask() {
+                task.item = textbar.text
+                task.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            }
+            navigationController!.popViewControllerAnimated(true)
         }
     }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+            
+            func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
 }
+}
+
